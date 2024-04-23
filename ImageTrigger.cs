@@ -15,7 +15,7 @@ namespace AllHeads.ImageProcessor
         }
 
         [Function(nameof(BlobTrigger))]
-        public async Task Run([BlobTrigger("images/{name}", Connection = "allheadsimagestorage_STORAGE")] BlobClient blobClient, string name)
+        public async Task Run([BlobTrigger("images/{name}", Connection = "AzureWebJobsStorage")] BlobClient blobClient, string name)
         {
             var response = blobClient.DownloadStreaming();
             if(response.Value.Details.Metadata.ContainsKey("image_tag"))
